@@ -1,0 +1,14 @@
+TO-DO:
+-remove debug information from help messages
+  -such as "image==null"
+-3D is not smooth. Has discrete plans
+  -need oversampling?
+-test private static mathematical functions
+-javadocs in stereogram generation code (not in gui)
+-guide image
+-Help content
+  -maybe tooltip texts is enough
+-find more images (textures and maps)
+-start internationalization
+  -portuguese
+  -create wiki entry for internationalization
