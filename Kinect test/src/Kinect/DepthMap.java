@@ -36,7 +36,7 @@ public class DepthMap extends PApplet
   public void setup() 
   {
     size(640*2, 480);
-    
+    frameRate(30);
     if (ContextTest.isInit() == false)
     {
         println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
@@ -65,7 +65,7 @@ public class DepthMap extends PApplet
 
   // draw irImageMap
     image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
-    saveFrame("frames/img-####.png");
+    saveFrame("frames/img-####.tiff");
   }
  
 }
