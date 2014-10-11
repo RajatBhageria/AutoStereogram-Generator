@@ -6,6 +6,10 @@
 
 package Kinect;
 
+import SimpleOpenNI.SimpleOpenNI;
+import processing.core.PApplet;
+import static processing.core.PApplet.println;
+
 /**
  *
  * @author crisscrosskao
@@ -27,11 +31,6 @@ public class DepthMap extends PApplet
       SimpleOpenNI context = new SimpleOpenNI (this);
       ContextTest = context;
   }
-  public static void main(String args[]) 
-  {
-    PApplet.main(new String[] {"Kinect.DepthMap"});
-  }
-  
   private SimpleOpenNI ContextTest;
   
   public void setup() 

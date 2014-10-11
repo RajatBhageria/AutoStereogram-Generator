@@ -96,6 +96,7 @@ public class MainGUI extends javax.swing.JFrame {
         intensityLabel = new javax.swing.JLabel();
         intensitySlider = new javax.swing.JSlider();
         percentLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
         helpMenuItem = new javax.swing.JMenuItem();
@@ -280,6 +281,18 @@ public class MainGUI extends javax.swing.JFrame {
                 mapPreviewPanelMousePressed(evt);
             }
         });
+
+        javax.swing.GroupLayout mapPreviewPanelLayout = new javax.swing.GroupLayout(mapPreviewPanel);
+        mapPreviewPanel.setLayout(mapPreviewPanelLayout);
+        mapPreviewPanelLayout.setHorizontalGroup(
+            mapPreviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 106, Short.MAX_VALUE)
+        );
+        mapPreviewPanelLayout.setVerticalGroup(
+            mapPreviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 106, Short.MAX_VALUE)
+        );
+
         mapAndPatternPanel.add(mapPreviewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 110, 110));
 
         patternLabel.setText("Texture pattern:");
@@ -296,6 +309,18 @@ public class MainGUI extends javax.swing.JFrame {
                 patternPreviewPanelMousePressed(evt);
             }
         });
+
+        javax.swing.GroupLayout patternPreviewPanelLayout = new javax.swing.GroupLayout(patternPreviewPanel);
+        patternPreviewPanel.setLayout(patternPreviewPanelLayout);
+        patternPreviewPanelLayout.setHorizontalGroup(
+            patternPreviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 106, Short.MAX_VALUE)
+        );
+        patternPreviewPanelLayout.setVerticalGroup(
+            patternPreviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 106, Short.MAX_VALUE)
+        );
+
         mapAndPatternPanel.add(patternPreviewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 110));
 
         bottomPanel.add(mapAndPatternPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 220));
@@ -434,6 +459,17 @@ public class MainGUI extends javax.swing.JFrame {
 
         bottomPanel.add(colorsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 290, 220));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 285, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         helpMenu.setText("Help");
 
         helpMenuItem.setText("Content...");
@@ -459,15 +495,22 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -853,6 +896,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel intensityLabel;
     private javax.swing.JSlider intensitySlider;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.ButtonGroup lookButtonGroup;
     private javax.swing.JLabel lookLabel;
     private javax.swing.JPanel mapAndPatternPanel;
