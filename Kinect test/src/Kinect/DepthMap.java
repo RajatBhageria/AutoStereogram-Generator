@@ -65,6 +65,7 @@ public class DepthMap extends PApplet
 
   // draw irImageMap
     image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
+    saveFrame("frames/img-####.png");
   }
  
 }

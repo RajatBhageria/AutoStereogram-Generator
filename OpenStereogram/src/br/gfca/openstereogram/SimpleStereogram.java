@@ -57,4 +57,5 @@ public class SimpleStereogram {
 		}
 		return bf;
 	}
+        
 }
