@@ -1,4 +1,4 @@
 HackRUf2014
 ===========
 
-Software to Convert Video to Auto Stereogram 
+Software that converts Video to Auto Stereogram. Fork of OpenStereogram (https://code.google.com/p/openstereogram/). Created using Microsoft Kinect, NetBeans, Processing API, and Java.
