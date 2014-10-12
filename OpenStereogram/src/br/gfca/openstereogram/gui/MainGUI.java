@@ -18,7 +18,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import Kinect.*;
 
 /**
  *
@@ -34,7 +33,6 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.stereogramWindow = null;
-        depthMap.setVisible(true);
     }
 
     /** This method is called from within the constructor to
@@ -99,7 +97,7 @@ public class MainGUI extends javax.swing.JFrame {
         intensityLabel = new javax.swing.JLabel();
         intensitySlider = new javax.swing.JSlider();
         percentLabel = new javax.swing.JLabel();
-        depthMap = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
         helpMenuItem = new javax.swing.JMenuItem();
@@ -470,20 +468,14 @@ public class MainGUI extends javax.swing.JFrame {
 
         bottomPanel.add(colorsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 290, 220));
 
-        depthMap.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                depthMapMouseMoved(evt);
-            }
-        });
-
-        javax.swing.GroupLayout depthMapLayout = new javax.swing.GroupLayout(depthMap);
-        depthMap.setLayout(depthMapLayout);
-        depthMapLayout.setHorizontalGroup(
-            depthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 364, Short.MAX_VALUE)
         );
-        depthMapLayout.setVerticalGroup(
-            depthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -515,7 +507,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(depthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -526,7 +518,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(depthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -784,31 +776,12 @@ public class MainGUI extends javax.swing.JFrame {
         new AboutDialog( this, true ).setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
-
     private void recordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordButtonActionPerformed
-        DepthMap.setRecordFlag(true);
+        
         generateButtonActionPerformed(evt);
         
     }//GEN-LAST:event_recordButtonActionPerformed
 
-
-    private void depthMapMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_depthMapMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_depthMapMouseMoved
-
-    public class DepthMap extends javax.swing.JFrame {
-        public DepthMap()
-        {
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            javax.swing.JPanel DepthMap = new javax.swing.JPanel();
-            DepthMap.setBounds(20, 20, 600, 600);
-            processing.core.PApplet sketch = new Kinect.DepthMap();
-            DepthMap.add(sketch);
-            this.add(DepthMap);
-            sketch.init(); //this is the function used to start the execution of the sketch
-            this.setVisible(true);
-        }
-    }
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -920,7 +893,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel color3Label;
     private javax.swing.JPanel color3Panel;
     private javax.swing.JPanel colorsPanel;
-    private javax.swing.JPanel depthMap;
     private javax.swing.JRadioButton dottedRadioButton;
     private javax.swing.ButtonGroup elementButtonGroup;
     private javax.swing.JLabel elementLabel;
@@ -939,6 +911,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel intensityLabel;
     private javax.swing.JSlider intensitySlider;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.ButtonGroup lookButtonGroup;
     private javax.swing.JLabel lookLabel;
     private javax.swing.JPanel mapAndPatternPanel;
