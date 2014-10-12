@@ -634,24 +634,30 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_patternPreviewPanelMousePressed
+    
     private File[] mapFiles;
-
+    final ArrayList imagesFromRecordedVideo = new ArrayList();
+    int c = imagesFromRecordedVideo.size();
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
-            mapFileChooser.setMultiSelectionEnabled(true);
-            int button = this.mapFileChooser.showOpenDialog(this);
-            if (button == JFileChooser.APPROVE_OPTION) {
-                mapFiles = mapFileChooser.getSelectedFiles();
-                
-                try {
-                    File f = this.mapFileChooser.getSelectedFile();
-                    BufferedImage bf = this.getImage(f);
-                    this.mapPreviewPanel.setImage(bf);
-                } catch (Exception e) {
-                    this.mapPreviewPanel.resetImage();
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            //mapFileChooser.setMultiSelectionEnabled(true);
+            //int button = this.mapFileChooser.showOpenDialog(this);
+            //if (button == JFileChooser.APPROVE_OPTION) {
+            //mapFiles = mapFileChooser.getSelectedFiles();
+                for (int d = 0; d < c; d++){
+                    try {
+
+                        File f = (File) imagesFromRecordedVideo.get(d);
+                        System.out.println("1141 " + imagesFromRecordedVideo);
+                        //File f = this.mapFileChooser.getSelectedFile();
+                        BufferedImage bf = this.getImage(f);
+                        this.mapPreviewPanel.setImage(bf); 
+                    }catch (Exception e) {
+                        this.mapPreviewPanel.resetImage();
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-            }
+            //}
         }
     }//GEN-LAST:event_mapPreviewPanelMousePressed
 
