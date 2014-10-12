@@ -29,6 +29,8 @@ public class SimpleStereogram {
 	}
 	
 	public void generateTexturedSIRD() {
+                            System.out.println("i'm jere");
+
 		BufferedImage depthMap = getImage("./images/depthMaps/Struna.jpg");
 		BufferedImage texturePattern = getImage("./images/texturePatterns/RAND7.jpg");
 		
@@ -44,6 +46,8 @@ public class SimpleStereogram {
 				new StereogramWindow(stereogram).setVisible(true);
 			}
 		});
+                System.out.println("i'm jere");
+
 	}
 
 	private BufferedImage getImage(String file) {

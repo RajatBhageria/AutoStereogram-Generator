@@ -111,7 +111,7 @@ public class StereogramGenerator {
 			float observationDistanceInches, float eyeSeparationInches,
 			float maxDepthInches, float minDepthInches,
 			int horizontalPPI, int verticalPPI ) {
-		
+
 		depthMap = ImageManipulator.resizeDepthMap(depthMap, width, height);		
 		BufferedImage stereogram = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		int[] linksL = new int[width];
@@ -183,7 +183,6 @@ public class StereogramGenerator {
 				}
 			}
 		}
-		
 		return stereogram;
 	}
 }

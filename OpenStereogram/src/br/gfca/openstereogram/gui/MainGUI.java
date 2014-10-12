@@ -561,17 +561,20 @@ public class MainGUI extends javax.swing.JFrame {
     private ArrayList convertedFiles; 
     
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        System.out.println("1141 " + size);
-        for (int i = 0; i < size; i++) {
+        System.out.println("1" + size);
+        
             try {
-                if (this.dottedRadioButton.isSelected()) {
+                if (this.dottedRadioButton.isSelected()) 
+                {
                     BufferedImage depthMap = null;
-                    if (this.textRadioButton.isSelected()) {
-                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(),
-                                getStereogramWidth(), getStereogramHeight());
-                    } else {
-                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
-                    }
+//                    if (this.textRadioButton.isSelected()) 
+//                    {
+//                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
+//                    } 
+//                    else 
+//                    {
+//                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+//                    }
                     Color c1 = getColor1();
                     Color c2 = getColor2();
                     Color c3 = getColor3();
@@ -592,20 +595,24 @@ public class MainGUI extends javax.swing.JFrame {
                             obsDistance, eyeSep,
                             maxDepth, minDepth,
                             horizPPI);
-                    if (this.stereogramWindow != null) {
-                        this.stereogramWindow.dispose();
-                    }
-                    this.stereogramWindow = new StereogramWindow(stereogram);
-                    this.stereogramWindow.setVisible(true);
+//                    if (this.stereogramWindow != null) 
+//                    {
+//                        this.stereogramWindow.dispose();
+//                    }
+                    //this.stereogramWindow = new StereogramWindow(stereogram);
+                    //this.stereogramWindow.setVisible(true);
                     }
                  else {
-                    
+                  for (int i = 0; i < size; i++) 
+                  {
                     BufferedImage depthMap = getImage(imagesFromRecordedVideo.get(i));
-                    if (this.textRadioButton.isSelected()) {
-                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
-                    } else {
-                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
-                    }
+//                    if (this.textRadioButton.isSelected()) 
+//                    {
+//                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
+//                    } 
+//                    else {
+//                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+//                    }
                     BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
                     float obsDistance = getObservationDistance();
                     float eyeSep = getEyeSeparation();
@@ -623,14 +630,14 @@ public class MainGUI extends javax.swing.JFrame {
                             obsDistance, eyeSep,
                             maxDepth, minDepth,
                             horizPPI, vertPPI);
-                    if (this.stereogramWindow != null) {
-                        this.stereogramWindow.dispose();
-                    }
-                    
+//                    if (this.stereogramWindow != null) {
+//                        this.stereogramWindow.dispose();
+//                    }
                     convertedFiles.add(stereogram);
                     System.out.println("1141 " + convertedFiles);
                     File f = this.saveToFileFileChooser.getSelectedFile();
                     saveFile(f);
+                }
                 }
             } 
             catch (Exception e) {
@@ -638,7 +645,7 @@ public class MainGUI extends javax.swing.JFrame {
                         System.getProperty("line.separator") +
                         "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }   
+           
     }//GEN-LAST:event_generateButtonActionPerformed
     private javax.swing.JFileChooser saveToFileFileChooser;
 
@@ -841,8 +848,6 @@ public class MainGUI extends javax.swing.JFrame {
         DepthMap.changeRecordFlag(false);
         recordButton.setVisible(true);
         stopButton.setVisible(false);
-
-        
     }//GEN-LAST:event_stopButtonActionPerformed
 
     private void changeMouseCursor(boolean isDefault) {
