@@ -621,7 +621,8 @@ public class MainGUI extends javax.swing.JFrame {
                     System.out.println("1141 " + convertedFiles);
                     //this.stereogramWindow = new StereogramWindow(stereogram);
                     //this.stereogramWindow.setVisible(true);
-                saveFile(mapFiles[i]);
+                saveFile((File)convertedFiles.get(i));
+                
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error generating stereogram." +
