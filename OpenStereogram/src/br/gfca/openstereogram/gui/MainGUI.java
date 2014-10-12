@@ -637,10 +637,11 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_patternPreviewPanelMousePressed
     
     private File[] mapFiles;
-    File files1 = new File("C:\\");
-    ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(files1.listFiles()));
-    //final ArrayList imagesFromRecordedVideo = new ArrayList();
+    //File folder = new File("/Users/crisscrosskao/Documents/GitHub/HackRUf2014/OpenStereogram/frames");
+    //ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+    final ArrayList imagesFromRecordedVideo = new ArrayList();
     int c = imagesFromRecordedVideo.size();
+    
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
             //mapFileChooser.setMultiSelectionEnabled(true);
