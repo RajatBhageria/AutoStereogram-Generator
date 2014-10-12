@@ -55,6 +55,7 @@ public class MainGUI extends javax.swing.JFrame {
         elementLabel = new javax.swing.JLabel();
         textRadioButton = new javax.swing.JRadioButton();
         mapRadioButton = new javax.swing.JRadioButton();
+        recordButton = new javax.swing.JButton();
         parametersPanel = new javax.swing.JPanel();
         observationLabel = new javax.swing.JLabel();
         observationTextField = new javax.swing.JTextField();
@@ -161,6 +162,14 @@ public class MainGUI extends javax.swing.JFrame {
         mapRadioButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mapRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         typePanel.add(mapRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 120, -1));
+
+        recordButton.setText("Record");
+        recordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recordButtonActionPerformed(evt);
+            }
+        });
+        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         topPanel.add(typePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 250));
 
@@ -767,6 +776,12 @@ public class MainGUI extends javax.swing.JFrame {
         new AboutDialog( this, true ).setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    private void recordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordButtonActionPerformed
+        
+        generateButtonActionPerformed(evt);
+        
+    }//GEN-LAST:event_recordButtonActionPerformed
+
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -915,6 +930,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel patternLabel;
     private br.gfca.openstereogram.gui.ImagePreviewPanel patternPreviewPanel;
     private javax.swing.JLabel percentLabel;
+    private javax.swing.JButton recordButton;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
     private javax.swing.JLabel textLabel;
