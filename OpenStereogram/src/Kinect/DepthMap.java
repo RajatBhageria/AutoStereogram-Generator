@@ -81,7 +81,7 @@ public class DepthMap extends PApplet
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
     if (recordFlag)
     {
-        saveFrame("frames/img-####.png");
+        saveFrame("frames/img-####.tiff");
     }
   }
  
