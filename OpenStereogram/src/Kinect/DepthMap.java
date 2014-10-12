@@ -26,6 +26,7 @@ import static processing.core.PApplet.println;
 
 public class DepthMap extends PApplet 
 {
+  static boolean recordFlag = false;
   public DepthMap() 
   {
       SimpleOpenNI context = new SimpleOpenNI (this);
@@ -33,10 +34,21 @@ public class DepthMap extends PApplet
   }
   private SimpleOpenNI ContextTest;
   
+  public static void changeRecordFlag(boolean b)
+  {
+      recordFlag = b;
+  }
+  
+  public static boolean getRecordFlag()
+  {
+      return recordFlag;
+  }
+  
+  
   public void setup() 
   {
     size(640*2, 480);
-    
+    frameRate(30);
     if (ContextTest.isInit() == false)
     {
         println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
@@ -65,6 +77,10 @@ public class DepthMap extends PApplet
 
   // draw irImageMap
     image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
+    if (recordFlag)
+    {
+        saveFrame("frames/img-####.tiff");
+    }
   }
  
 }

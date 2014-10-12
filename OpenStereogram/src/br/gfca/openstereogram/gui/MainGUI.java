@@ -5,13 +5,17 @@
  */
 package br.gfca.openstereogram.gui;
 
+import Kinect.DepthMap;
+
 import br.gfca.openstereogram.stereo.ImageManipulator;
 import br.gfca.openstereogram.stereo.StereogramGenerator;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
@@ -777,8 +781,15 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void recordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordButtonActionPerformed
-        
-        generateButtonActionPerformed(evt);
+        if (DepthMap.getRecordFlag() == false)
+        {
+            DepthMap.changeRecordFlag(true);
+        }
+        else
+        {
+            generateButtonActionPerformed(evt);
+            DepthMap.changeRecordFlag(false);
+        }
         
     }//GEN-LAST:event_recordButtonActionPerformed
 
