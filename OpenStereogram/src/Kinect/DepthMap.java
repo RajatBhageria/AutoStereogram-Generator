@@ -12,7 +12,7 @@ import static processing.core.PApplet.println;
 
 /**
  *
- * @author RajatBhageria, crisscrosskao, sh953
+ * @author crisscrosskao
  */
 /*
  * To change this license header, choose License Headers in Project Properties.

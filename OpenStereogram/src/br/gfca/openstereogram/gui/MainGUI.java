@@ -1,7 +1,7 @@
 /*
  * MainGUI.java
  *
- * @author Gustavo, RajatBhageria, crisscrosskao, sh953
+ * Created on 12 de Janeiro de 2008, 19:37
  */
 package br.gfca.openstereogram.gui;
 
