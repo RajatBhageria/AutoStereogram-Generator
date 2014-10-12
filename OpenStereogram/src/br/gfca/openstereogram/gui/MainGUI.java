@@ -8,6 +8,7 @@ package br.gfca.openstereogram.gui;
 import Kinect.DepthMap;
 
 import br.gfca.openstereogram.stereo.ImageManipulator;
+import br.gfca.openstereogram.*;
 import br.gfca.openstereogram.stereo.StereogramGenerator;
 
 import java.awt.Color;
@@ -33,13 +34,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MainGUI extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 5494881572447296266L;
-    private StereogramWindow stereogramWindow;
 
     /** Creates new form MainGUI */
     public MainGUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.stereogramWindow = null;
     }
 
     /** This method is called from within the constructor to
@@ -549,19 +548,18 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private BufferedImage image;
-    private void saveFile(File file) 
+    private void saveFile(File file, BufferedImage output) 
     {
         try {
-            ImageIO.write(this.image, "jpg", file);
+            ImageIO.write(output, "png", file);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error while saving: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    private ArrayList convertedFiles; 
+    private ArrayList<BufferedImage> convertedFiles= new ArrayList<BufferedImage>(); 
     
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        System.out.println("1" + size);
         
             try {
                 if (this.dottedRadioButton.isSelected()) 
@@ -595,6 +593,7 @@ public class MainGUI extends javax.swing.JFrame {
                             obsDistance, eyeSep,
                             maxDepth, minDepth,
                             horizPPI);
+                    
 //                    if (this.stereogramWindow != null) 
 //                    {
 //                        this.stereogramWindow.dispose();
@@ -602,10 +601,21 @@ public class MainGUI extends javax.swing.JFrame {
                     //this.stereogramWindow = new StereogramWindow(stereogram);
                     //this.stereogramWindow.setVisible(true);
                     }
-                 else {
-                  for (int i = 0; i < size; i++) 
-                  {
-                    BufferedImage depthMap = getImage(imagesFromRecordedVideo.get(i));
+                else 
+                {
+                    imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+                    size = imagesFromRecordedVideo.size();
+                                        System.out.println(size);
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        File f = imagesFromRecordedVideo.get(i);
+                        if (!f.getName().toUpperCase().endsWith(".PNG")){
+                            System.out.println("after");
+                            continue;
+                        }
+                        BufferedImage depthMap = getImage(imagesFromRecordedVideo.get(i));
+
 //                    if (this.textRadioButton.isSelected()) 
 //                    {
 //                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
@@ -613,31 +623,34 @@ public class MainGUI extends javax.swing.JFrame {
 //                    else {
 //                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
 //                    }
+
                     BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
+
                     float obsDistance = getObservationDistance();
                     float eyeSep = getEyeSeparation();
                     float maxDepth = getMaxDepth();
-                    float minDepth = getMinDepth();
-                    int width = getStereogramWidth();
-                    int height = getStereogramHeight();
-                    int vertPPI = getVerticalPPI();
-                    int horizPPI = getHorizontalPPI();
+                    float minDepth = getMinDepth();//System.out.println(minDepth);
+                    int vertPPI = getVerticalPPI(); //System.out.println(vertPPI);
+                    int horizPPI = getHorizontalPPI(); // System.out.println(horizPPI);
 
                     //This one activates when the "Textured" option is selected
+
+
                     BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
                             depthMap, texturePattern,
-                            width, height,
-                            obsDistance, eyeSep,
-                            maxDepth, minDepth,
-                            horizPPI, vertPPI);
+                            640, 480,
+				14f, 2.5f,
+				12f, 0f,
+				72, 72);
 //                    if (this.stereogramWindow != null) {
 //                        this.stereogramWindow.dispose();
 //                    }
+
+
                     convertedFiles.add(stereogram);
-                    System.out.println("1141 " + convertedFiles);
-                    File f = this.saveToFileFileChooser.getSelectedFile();
-                    saveFile(f);
-                }
+                    File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
+                    saveFile(f1,stereogram);
+                    }
                 }
             } 
             catch (Exception e) {
