@@ -15,6 +15,7 @@ import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JColorChooser;
@@ -531,75 +532,85 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    ArrayList convertedFiles = new ArrayList();
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        try {
-            if (this.dottedRadioButton.isSelected()) {
-                BufferedImage depthMap = null;
-                if (this.textRadioButton.isSelected()) {
-                    depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(),
-                            getStereogramWidth(), getStereogramHeight());
-                } else {
-                    depthMap = getImage(this.mapFileChooser.getSelectedFile());
-                }
-                Color c1 = getColor1();
-                Color c2 = getColor2();
-                Color c3 = getColor3();
-                float intensity = getIntensity();
-                float obsDistance = getObservationDistance();
-                float eyeSep = getEyeSeparation();
-                float maxDepth = getMaxDepth();
-                float minDepth = getMinDepth();
-                int width = getStereogramWidth();
-                int height = getStereogramHeight();
-                int horizPPI = getHorizontalPPI();
+        int k = mapFiles.length;
+        System.out.println("1141 " + mapFiles.length);
+        for (int i = 0; i < k; i++) {
+            try {
+                if (this.dottedRadioButton.isSelected()) {
+                    BufferedImage depthMap = null;
+                    if (this.textRadioButton.isSelected()) {
+                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(),
+                                getStereogramWidth(), getStereogramHeight());
+                    } else {
+                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+                    }
+                    Color c1 = getColor1();
+                    Color c2 = getColor2();
+                    Color c3 = getColor3();
+                    float intensity = getIntensity();
+                    float obsDistance = getObservationDistance();
+                    float eyeSep = getEyeSeparation();
+                    float maxDepth = getMaxDepth();
+                    float minDepth = getMinDepth();
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
+                    int horizPPI = getHorizontalPPI();
 
-                BufferedImage stereogram = StereogramGenerator.generateSIRD(
-                        depthMap,
-                        c1, c2, c3, intensity,
-                        width, height,
-                        obsDistance, eyeSep,
-                        maxDepth, minDepth,
-                        horizPPI);
-                if (this.stereogramWindow != null) {
-                    this.stereogramWindow.dispose();
-                }
-                this.stereogramWindow = new StereogramWindow(stereogram);
-                this.stereogramWindow.setVisible(true);
-            } else {
-                BufferedImage depthMap = null;
-                if (this.textRadioButton.isSelected()) {
-                    depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
-                } else {
-                    depthMap = getImage(this.mapFileChooser.getSelectedFile());
-                }
-                BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
-                float obsDistance = getObservationDistance();
-                float eyeSep = getEyeSeparation();
-                float maxDepth = getMaxDepth();
-                float minDepth = getMinDepth();
-                int width = getStereogramWidth();
-                int height = getStereogramHeight();
-                int vertPPI = getVerticalPPI();
-                int horizPPI = getHorizontalPPI();
+                    //To my understanding, this object activates when the "Dotted" option is selected
+                    BufferedImage stereogram = StereogramGenerator.generateSIRD(
+                            depthMap,
+                            c1, c2, c3, intensity,
+                            width, height,
+                            obsDistance, eyeSep,
+                            maxDepth, minDepth,
+                            horizPPI);
+                    if (this.stereogramWindow != null) {
+                        this.stereogramWindow.dispose();
+                    }
+                    this.stereogramWindow = new StereogramWindow(stereogram);
+                    this.stereogramWindow.setVisible(true);
+                    }
+                 else {
+                    BufferedImage depthMap = null;
+                    if (this.textRadioButton.isSelected()) {
+                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
+                    } else {
+                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+                    }
+                    BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
+                    float obsDistance = getObservationDistance();
+                    float eyeSep = getEyeSeparation();
+                    float maxDepth = getMaxDepth();
+                    float minDepth = getMinDepth();
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
+                    int vertPPI = getVerticalPPI();
+                    int horizPPI = getHorizontalPPI();
 
-                BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
-                        depthMap, texturePattern,
-                        width, height,
-                        obsDistance, eyeSep,
-                        maxDepth, minDepth,
-                        horizPPI, vertPPI);
-                if (this.stereogramWindow != null) {
-                    this.stereogramWindow.dispose();
+                    //This one activates when the "Textured" option is selected
+                    BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
+                            depthMap, texturePattern,
+                            width, height,
+                            obsDistance, eyeSep,
+                            maxDepth, minDepth,
+                            horizPPI, vertPPI);
+                    if (this.stereogramWindow != null) {
+                        this.stereogramWindow.dispose();
+                    }
+                    
+                    convertedFiles.add(stereogram);
+                    System.out.println("1141 " + convertedFiles);
+                    //this.stereogramWindow = new StereogramWindow(stereogram);
+                    //this.stereogramWindow.setVisible(true);
                 }
-                this.stereogramWindow = new StereogramWindow(stereogram);
-                this.stereogramWindow.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error generating stereogram." +
+                        System.getProperty("line.separator") +
+                        "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error generating stereogram." +
-                    System.getProperty("line.separator") +
-                    "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        }   
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void patternPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patternPreviewPanelMousePressed
@@ -618,11 +629,15 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_patternPreviewPanelMousePressed
+    private File[] mapFiles;
 
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
+            mapFileChooser.setMultiSelectionEnabled(true);
             int button = this.mapFileChooser.showOpenDialog(this);
             if (button == JFileChooser.APPROVE_OPTION) {
+                mapFiles = mapFileChooser.getSelectedFiles();
+                
                 try {
                     File f = this.mapFileChooser.getSelectedFile();
                     BufferedImage bf = this.getImage(f);

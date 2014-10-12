@@ -47,11 +47,9 @@ public class DepthMap extends PApplet
   {
       return recordFlag;
   }
-  
-  
   public void setup() 
   {
-    size(640*2, 480);
+    size(640, 480);
     frameRate(30);
     if (ContextTest.isInit() == false)
     {
@@ -74,13 +72,13 @@ public class DepthMap extends PApplet
   {
     ContextTest.update();
 
-     background(200, 0, 0);
+     background(100, 0, 0);
 
   // draw depthImageMap
     image(ContextTest.depthImage(), 0, 0);
 
   // draw irImageMap
-    image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
+   // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
     if (recordFlag)
     {
         saveFrame("frames/img-####.tiff");
