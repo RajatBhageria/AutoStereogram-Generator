@@ -3,30 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.gfca.openstereogram.gui;
 
-import Kinect.DepthMap;
+package br.gfca.openstereogram.gui;
 
 /**
  *
- * @author hacker
+ * @author crisscrosskao
  */
-public class DepthFrame extends javax.swing.JFrame {
+public class NewJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form depthFrame
+     * Creates new form NewJFrame
      */
-    public DepthFrame() {
-       initComponents();
-        this.setSize(640, 380); //The window Dimensions
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        javax.swing.JPanel panel = new javax.swing.JPanel();
-        panel.setBounds(20, 20, 600, 600);
-        processing.core.PApplet sketch = new DepthMap();
-        panel.add(sketch);
-        this.add(panel);
-        sketch.init(); //this is the function used to start the execution of the sketch
-        this.setVisible(true);
+    public NewJFrame() {
+        initComponents();
     }
 
     /**
@@ -71,20 +61,20 @@ public class DepthFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DepthFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DepthFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DepthFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DepthFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DepthFrame().setVisible(true);
+                new NewJFrame().setVisible(true);
             }
         });
     }
