@@ -15,6 +15,7 @@ import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -538,11 +539,21 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    ArrayList convertedFiles = new ArrayList();
+    private BufferedImage image;
+    private void saveFile(File file) 
+    {
+        try {
+            ImageIO.write(this.image, "jpg", file);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error while saving: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private ArrayList convertedFiles; 
+    
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        int k = mapFiles.length;
         System.out.println("1141 " + mapFiles.length);
-        for (int i = 0; i < k; i++) {
+        for (int i = 0; i < mapFiles.length; i++) {
             try {
                 if (this.dottedRadioButton.isSelected()) {
                     BufferedImage depthMap = null;
@@ -610,6 +621,7 @@ public class MainGUI extends javax.swing.JFrame {
                     System.out.println("1141 " + convertedFiles);
                     //this.stereogramWindow = new StereogramWindow(stereogram);
                     //this.stereogramWindow.setVisible(true);
+                saveFile(mapFiles[i]);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error generating stereogram." +
