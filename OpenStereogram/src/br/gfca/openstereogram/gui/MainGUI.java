@@ -33,7 +33,7 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.stereogramWindow = null;
-        new DepthMap().setVisible(true);
+        DepthMap.setVisible(true);
     }
 
     /** This method is called from within the constructor to
@@ -795,7 +795,6 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DepthMapMouseMoved
 
-<<<<<<< Updated upstream
     public class DepthMap extends javax.swing.JFrame {
         public DepthMap()
         {
@@ -810,8 +809,6 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
 >>>>>>> FETCH_HEAD
-=======
->>>>>>> Stashed changes
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
