@@ -26,10 +26,14 @@ import static processing.core.PApplet.println;
 
 public class DepthMap extends PApplet 
 {
+  private boolean recordFlag = false;
   public DepthMap() 
   {
       SimpleOpenNI context = new SimpleOpenNI (this);
       ContextTest = context;
+  }
+  public void setRecordFlag(boolean b){
+      recordFlag = b;
   }
   private SimpleOpenNI ContextTest;
   
@@ -65,7 +69,10 @@ public class DepthMap extends PApplet
 
   // draw irImageMap
     image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
-    saveFrame("frames/img-####.tiff");
+    if (recordFlag)
+    {
+        saveFrame("frames/img-####.tiff");
+    }
   }
  
 }

@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import Kinect.*;
 
 /**
  *
@@ -33,7 +34,7 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.stereogramWindow = null;
-        DepthMap.setVisible(true);
+        depthMap.setVisible(true);
     }
 
     /** This method is called from within the constructor to
@@ -98,7 +99,7 @@ public class MainGUI extends javax.swing.JFrame {
         intensityLabel = new javax.swing.JLabel();
         intensitySlider = new javax.swing.JSlider();
         percentLabel = new javax.swing.JLabel();
-        DepthMap = new javax.swing.JPanel();
+        depthMap = new javax.swing.JPanel();
         jMenuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
         helpMenuItem = new javax.swing.JMenuItem();
@@ -469,20 +470,20 @@ public class MainGUI extends javax.swing.JFrame {
 
         bottomPanel.add(colorsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 290, 220));
 
-        DepthMap.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        depthMap.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                DepthMapMouseMoved(evt);
+                depthMapMouseMoved(evt);
             }
         });
 
-        javax.swing.GroupLayout DepthMapLayout = new javax.swing.GroupLayout(DepthMap);
-        DepthMap.setLayout(DepthMapLayout);
-        DepthMapLayout.setHorizontalGroup(
-            DepthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout depthMapLayout = new javax.swing.GroupLayout(depthMap);
+        depthMap.setLayout(depthMapLayout);
+        depthMapLayout.setHorizontalGroup(
+            depthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 364, Short.MAX_VALUE)
         );
-        DepthMapLayout.setVerticalGroup(
-            DepthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        depthMapLayout.setVerticalGroup(
+            depthMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -514,7 +515,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DepthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(depthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -525,7 +526,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(DepthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(depthMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -783,17 +784,17 @@ public class MainGUI extends javax.swing.JFrame {
         new AboutDialog( this, true ).setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
-<<<<<<< HEAD
+
     private void recordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordButtonActionPerformed
-        
+        DepthMap.setRecordFlag(true);
         generateButtonActionPerformed(evt);
         
     }//GEN-LAST:event_recordButtonActionPerformed
 
-=======
-    private void DepthMapMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DepthMapMouseMoved
+
+    private void depthMapMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_depthMapMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_DepthMapMouseMoved
+    }//GEN-LAST:event_depthMapMouseMoved
 
     public class DepthMap extends javax.swing.JFrame {
         public DepthMap()
@@ -808,7 +809,6 @@ public class MainGUI extends javax.swing.JFrame {
             this.setVisible(true);
         }
     }
->>>>>>> FETCH_HEAD
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -911,7 +911,6 @@ public class MainGUI extends javax.swing.JFrame {
         return (Integer) this.sizeSpinner.getValue();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel DepthMap;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JLabel color1Label;
@@ -921,6 +920,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel color3Label;
     private javax.swing.JPanel color3Panel;
     private javax.swing.JPanel colorsPanel;
+    private javax.swing.JPanel depthMap;
     private javax.swing.JRadioButton dottedRadioButton;
     private javax.swing.ButtonGroup elementButtonGroup;
     private javax.swing.JLabel elementLabel;
