@@ -16,6 +16,7 @@ import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.JColorChooser;
@@ -636,7 +637,9 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_patternPreviewPanelMousePressed
     
     private File[] mapFiles;
-    final ArrayList imagesFromRecordedVideo = new ArrayList();
+    File files1 = new File("C:\\");
+    ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(files1.listFiles()));
+    //final ArrayList imagesFromRecordedVideo = new ArrayList();
     int c = imagesFromRecordedVideo.size();
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
