@@ -658,6 +658,9 @@ public class MainGUI extends javax.swing.JFrame {
                         System.getProperty("line.separator") +
                         "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            //Remove this if things dont work
+            VideoGenerator vid = new VideoGenerator();
+
            
     }//GEN-LAST:event_generateButtonActionPerformed
     private javax.swing.JFileChooser saveToFileFileChooser;
