@@ -63,6 +63,7 @@ public class MainGUI extends javax.swing.JFrame {
         textRadioButton = new javax.swing.JRadioButton();
         mapRadioButton = new javax.swing.JRadioButton();
         recordButton = new javax.swing.JButton();
+        stopButton = new javax.swing.JButton();
         parametersPanel = new javax.swing.JPanel();
         observationLabel = new javax.swing.JLabel();
         observationTextField = new javax.swing.JTextField();
@@ -176,7 +177,15 @@ public class MainGUI extends javax.swing.JFrame {
                 recordButtonActionPerformed(evt);
             }
         });
-        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, -1));
+
+        stopButton.setText("Stop");
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
+        typePanel.add(stopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 70, -1));
 
         topPanel.add(typePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 250));
 
@@ -552,8 +561,8 @@ public class MainGUI extends javax.swing.JFrame {
     private ArrayList convertedFiles; 
     
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        System.out.println("1141 " + mapFiles.length);
-        for (int i = 0; i < mapFiles.length; i++) {
+        System.out.println("1141 " + size);
+        for (int i = 0; i < size; i++) {
             try {
                 if (this.dottedRadioButton.isSelected()) {
                     BufferedImage depthMap = null;
@@ -590,7 +599,8 @@ public class MainGUI extends javax.swing.JFrame {
                     this.stereogramWindow.setVisible(true);
                     }
                  else {
-                    BufferedImage depthMap = null;
+                    
+                    BufferedImage depthMap = getImage(imagesFromRecordedVideo.get(i));
                     if (this.textRadioButton.isSelected()) {
                         depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
                     } else {
@@ -619,18 +629,18 @@ public class MainGUI extends javax.swing.JFrame {
                     
                     convertedFiles.add(stereogram);
                     System.out.println("1141 " + convertedFiles);
-                    //this.stereogramWindow = new StereogramWindow(stereogram);
-                    //this.stereogramWindow.setVisible(true);
-                saveFile((File)convertedFiles.get(i));
-                
+                    File f = this.saveToFileFileChooser.getSelectedFile();
+                    saveFile(f);
                 }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error generating stereogram." +
                         System.getProperty("line.separator") +
                         "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }   
     }//GEN-LAST:event_generateButtonActionPerformed
+    private javax.swing.JFileChooser saveToFileFileChooser;
 
     private void patternPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patternPreviewPanelMousePressed
         if (this.patternPreviewPanel.isEnabled()) {
@@ -649,18 +659,14 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_patternPreviewPanelMousePressed
     
-    private File[] mapFiles;
-    File files1 = new File("C:\\");
-    ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(files1.listFiles()));
-    //final ArrayList imagesFromRecordedVideo = new ArrayList();
-    int c = imagesFromRecordedVideo.size();
+    private final File folder = new File("/Users/crisscrosskao/Documents/GitHub/HackRUf2014/OpenStereogram/frames");
+    private ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+    private int size = imagesFromRecordedVideo.size();
+    
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
-            //mapFileChooser.setMultiSelectionEnabled(true);
-            //int button = this.mapFileChooser.showOpenDialog(this);
-            //if (button == JFileChooser.APPROVE_OPTION) {
-            //mapFiles = mapFileChooser.getSelectedFiles();
-                for (int d = 0; d < c; d++){
+          
+                for (int d = 0; d < size; d++){
                     try {
 
                         File f = (File) imagesFromRecordedVideo.get(d);
@@ -823,17 +829,21 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void recordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordButtonActionPerformed
-        if (DepthMap.getRecordFlag() == false)
-        {
-            DepthMap.changeRecordFlag(true);
-        }
-        else if (DepthMap.getRecordFlag() == true)
-        {
-            generateButtonActionPerformed(evt);
-            DepthMap.changeRecordFlag(false);
-        }
-        
+     
+        DepthMap.changeRecordFlag(true);  
+        stopButton.setVisible(true);
+        recordButton.setVisible(false);
+
     }//GEN-LAST:event_recordButtonActionPerformed
+
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+        // TODO add your handling code here:
+        DepthMap.changeRecordFlag(false);
+        recordButton.setVisible(true);
+        stopButton.setVisible(false);
+
+        
+    }//GEN-LAST:event_stopButtonActionPerformed
 
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -986,6 +996,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton recordButton;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
+    private javax.swing.JButton stopButton;
     private javax.swing.JLabel textLabel;
     private javax.swing.JRadioButton textRadioButton;
     private javax.swing.JTextField textTextField;

@@ -77,7 +77,7 @@ public class DepthMap extends PApplet
   // draw depthImageMap
     image(ContextTest.depthImage(), 0, 0);
 
-  // draw irImageMap
+   // draw irImageMap
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
     if (recordFlag)
     {
