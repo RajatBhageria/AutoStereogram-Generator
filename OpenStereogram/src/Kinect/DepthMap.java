@@ -27,6 +27,9 @@ import static processing.core.PApplet.println;
 public class DepthMap extends PApplet 
 {
   static boolean recordFlag = false;
+  String homeDir = System.getProperty("user.home");
+  String saveFrameDir = homeDir + "/Pictures/Autostereogram Frames/img-#####.jpg";
+  
   public DepthMap() 
   {
       SimpleOpenNI context = new SimpleOpenNI (this);
@@ -81,7 +84,7 @@ public class DepthMap extends PApplet
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
     if (recordFlag)
     {
-        saveFrame("frames/img-####.png");
+        saveFrame(saveFrameDir);
     }
   }
  
