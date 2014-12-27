@@ -548,38 +548,31 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private BufferedImage image;
-    private BufferedImage depthMap;
-    String homeDir = System.getProperty("user.home");
-    String saveFrameDir = homeDir + "/Pictures/Autostereogram Frames";
-    private final File folder = new File(saveFrameDir);
-    private ArrayList<File> imagesFromRecordedVideo;
     private void saveFile(File file, BufferedImage output) 
     {
         try {
-            ImageIO.write(output, "jpg", file);
+            ImageIO.write(output, "png", file);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error while saving: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    //private ArrayList<BufferedImage> convertedFiles = new ArrayList<BufferedImage>(); 
+    private ArrayList<BufferedImage> convertedFiles= new ArrayList<BufferedImage>(); 
     
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-            
+        
             try {
-                imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
-                System.out.println(imagesFromRecordedVideo.size());
-//                if (this.textRadioButton.isSelected()) 
+                if (this.dottedRadioButton.isSelected()) 
+                {
+                    BufferedImage depthMap = null;
+//                    if (this.textRadioButton.isSelected()) 
 //                    {
 //                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
 //                    } 
-//                    else {
+//                    else 
+//                    {
 //                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
 //                    }
-
-                    
-                        
-                if (this.dottedRadioButton.isSelected()) {
                     Color c1 = getColor1();
                     Color c2 = getColor2();
                     Color c3 = getColor3();
@@ -591,22 +584,15 @@ public class MainGUI extends javax.swing.JFrame {
                     int width = getStereogramWidth();
                     int height = getStereogramHeight();
                     int horizPPI = getHorizontalPPI();
-                    
-                    
-                    for (int i = 0; i < imagesFromRecordedVideo.size(); i++) {
-                        File f = imagesFromRecordedVideo.get(i);
-                        if (f.getName().toUpperCase().endsWith(".JPG")){
-                            depthMap = getImage(imagesFromRecordedVideo.get(i));
-                            BufferedImage stereogram = StereogramGenerator.generateSIRD(
-                                depthMap,
-                                c1, c2, c3, intensity,
-                                width, height,
-                                obsDistance, eyeSep,
-                                maxDepth, minDepth,
-                                horizPPI);
-                            //convertedFiles.add(stereogram);
-                            File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
-                            saveFile(f1,stereogram);
+
+                    //To my understanding, this object activates when the "Dotted" option is selected
+                    BufferedImage stereogram = StereogramGenerator.generateSIRD(
+                            depthMap,
+                            c1, c2, c3, intensity,
+                            width, height,
+                            obsDistance, eyeSep,
+                            maxDepth, minDepth,
+                            horizPPI);
                     
 //                    if (this.stereogramWindow != null) 
 //                    {
@@ -614,11 +600,29 @@ public class MainGUI extends javax.swing.JFrame {
 //                    }
                     //this.stereogramWindow = new StereogramWindow(stereogram);
                     //this.stereogramWindow.setVisible(true);
-                        }
                     }
-                    
-                } else {
-                    
+                else 
+                {
+                    imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+                    size = imagesFromRecordedVideo.size();
+                                        System.out.println(size);
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        File f = imagesFromRecordedVideo.get(i);
+                        if (!f.getName().toUpperCase().endsWith(".PNG")){
+                            System.out.println("after");
+                            continue;
+                        }
+                        BufferedImage depthMap = getImage(imagesFromRecordedVideo.get(i));
+
+//                    if (this.textRadioButton.isSelected()) 
+//                    {
+//                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
+//                    } 
+//                    else {
+//                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+//                    }
 
                     BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
 
@@ -628,35 +632,29 @@ public class MainGUI extends javax.swing.JFrame {
                     float minDepth = getMinDepth();//System.out.println(minDepth);
                     int vertPPI = getVerticalPPI(); //System.out.println(vertPPI);
                     int horizPPI = getHorizontalPPI(); // System.out.println(horizPPI);
-                    
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
+
                     //This one activates when the "Textured" option is selected
-                    for (int i = 0; i < imagesFromRecordedVideo.size(); i++) {
-                        File f = imagesFromRecordedVideo.get(i);
-                        
-                        if (f.getName().toUpperCase().endsWith(".JPG")){
-                            
-                            depthMap = getImage(imagesFromRecordedVideo.get(i));
-                            if (depthMap == null) {
-                                System.out.println("depthMap is null");
-                            }
-                            BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
-                                depthMap, texturePattern,
-                                640, 480,
-				14f, 2.5f,
-				12f, 0f,
-				72, 72);
-                            System.out.println("still good here");
+
+
+                    BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
+                            depthMap, texturePattern,
+                            width, height,
+				obsDistance, eyeSep,
+				maxDepth, minDepth,
+				horizPPI, vertPPI);
 //                    if (this.stereogramWindow != null) {
 //                        this.stereogramWindow.dispose();
 //                    }
-                            //convertedFiles.add(stereogram);
-                            File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
-                            saveFile(f1,stereogram);
-                        }
+
+
+                    convertedFiles.add(stereogram);
+                    File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
+                    saveFile(f1,stereogram);
                     }
                 }
             } 
-            
             catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error generating stereogram." +
                         System.getProperty("line.separator") +
@@ -683,11 +681,14 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_patternPreviewPanelMousePressed
     
+    private final File folder = new File("/Users/crisscrosskao/Documents/GitHub/HackRUf2014/OpenStereogram/frames");
+    private ArrayList<File> imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+    private int size = imagesFromRecordedVideo.size();
     
     private void mapPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPreviewPanelMousePressed
         if (this.mapPreviewPanel.isEnabled()) {
           
-                for (int d = 0; d < imagesFromRecordedVideo.size(); d++){
+                for (int d = 0; d < size; d++){
                     try {
 
                         File f = (File) imagesFromRecordedVideo.get(d);
