@@ -628,6 +628,8 @@ public class MainGUI extends javax.swing.JFrame {
                     float minDepth = getMinDepth();//System.out.println(minDepth);
                     int vertPPI = getVerticalPPI(); //System.out.println(vertPPI);
                     int horizPPI = getHorizontalPPI(); // System.out.println(horizPPI);
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
                     
                     //This one activates when the "Textured" option is selected
                     for (int i = 0; i < imagesFromRecordedVideo.size(); i++) {
@@ -641,10 +643,10 @@ public class MainGUI extends javax.swing.JFrame {
                             }
                             BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
                                 depthMap, texturePattern,
-                                640, 480,
-				14f, 2.5f,
-				12f, 0f,
-				72, 72);
+                                width, height,
+				obsDistance, eyeSep,
+				maxDepth, minDepth,
+				horizPPI, vertPPI);
                             System.out.println("still good here");
 //                    if (this.stereogramWindow != null) {
 //                        this.stereogramWindow.dispose();
