@@ -60,13 +60,10 @@ public class DepthMap extends PApplet
         exit();
         return;
     }
-    ContextTest.setMirror(true);
+    ContextTest.setMirror(false);
 
     // enable depthMap generation 
     ContextTest.enableDepth();
-
-    // enable ir generation
-    ContextTest.enableRGB();
   }
 
   // mirror is by default enabled
