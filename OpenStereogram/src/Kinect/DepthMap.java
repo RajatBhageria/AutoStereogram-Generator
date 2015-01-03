@@ -29,17 +29,18 @@ public class DepthMap extends PApplet
   static boolean recordFlag = false;
   String homeDir = System.getProperty("user.home");
   String saveFrameDir = homeDir + "/Pictures/Autostereogram Frames/img-#####.jpg";
+  private SimpleOpenNI kinect;
+  private PImage liveMap;
+  private int maxDistance = 1500;
   
   public DepthMap() 
   {
-      SimpleOpenNI context = new SimpleOpenNI (this);
-      ContextTest = context;
+      kinect = new SimpleOpenNI (this);
   }
   public static void main(String args[]) 
   {
     PApplet.main(new String[] {"Kinect.DepthMap"});
   }
-  private SimpleOpenNI ContextTest;
   
   public static void changeRecordFlag(boolean b)
   {
@@ -50,32 +51,55 @@ public class DepthMap extends PApplet
   {
       return recordFlag;
   }
+  
+  @Override
   public void setup() 
   {
     size(640, 480);
     frameRate(30);
-    if (ContextTest.isInit() == false)
+    if (kinect.isInit() == false)
     {
         println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
         exit();
         return;
     }
-    ContextTest.setMirror(false);
+    kinect.setMirror(false);
 
     // enable depthMap generation 
-    ContextTest.enableDepth();
+    kinect.enableDepth();
+    liveMap = loadImage("./images/try_640_480.jpg");
   }
 
   // mirror is by default enabled
 
+ @Override
  public void draw() 
   {
-    ContextTest.update();
-
-     background(100, 0, 0);
-
+     background(color(0,0,0));
+     kinect.update();
+     int[] depthValues = kinect.depthMap();
+     liveMap.width = 640;
+     liveMap.height = 480;
+     liveMap.loadPixels();
+     
+     for (int y = 0; y < 480; y++) {
+        for (int x = 0; x < 640; x++) {
+           int i = x + (y * 640);
+           int currentDepthValue = depthValues[i];
+           if (currentDepthValue > maxDistance) {
+               liveMap.pixels[i] = color(0, 0, 0);  
+           }       
+           else {
+               int lum = (int) (-0.2684 * currentDepthValue + 402.63);
+               liveMap.pixels[i] = color(lum, lum, lum);
+           }
+        }  
+     }
+     
+     liveMap.updatePixels();
+     
   // draw depthImageMap
-    image(ContextTest.depthImage(), 0, 0);
+    image(liveMap, 0, 0);
 
    // draw irImageMap
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
