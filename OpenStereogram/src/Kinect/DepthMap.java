@@ -76,7 +76,6 @@ public class DepthMap extends PApplet
 
   // draw depthImageMap
     image(ContextTest.depthImage(), 0, 0);
-    //ContextTest.setDepthImageColor(0, 0, 0);
 
    // draw irImageMap
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);

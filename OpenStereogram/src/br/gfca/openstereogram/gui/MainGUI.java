@@ -82,8 +82,7 @@ public class MainGUI extends javax.swing.JFrame {
         hPpiTextField = new javax.swing.JTextField();
         guideAndGeneratePanel = new javax.swing.JPanel();
         guideImagePanel = new javax.swing.JPanel();
-        generateButton1 = new javax.swing.JButton();
-        removeBackgroundButton = new javax.swing.JButton();
+        generateButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         mapAndPatternPanel = new javax.swing.JPanel();
         textLabel = new javax.swing.JLabel();
@@ -177,7 +176,7 @@ public class MainGUI extends javax.swing.JFrame {
                 recordButtonActionPerformed(evt);
             }
         });
-        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 70, -1));
+        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, -1));
 
         stopButton.setText("Stop");
         stopButton.addActionListener(new java.awt.event.ActionListener() {
@@ -252,30 +251,22 @@ public class MainGUI extends javax.swing.JFrame {
         guideImagePanel.setLayout(guideImagePanelLayout);
         guideImagePanelLayout.setHorizontalGroup(
             guideImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
+            .addGap(0, 186, Short.MAX_VALUE)
         );
         guideImagePanelLayout.setVerticalGroup(
             guideImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 186, Short.MAX_VALUE)
+            .addGap(0, 206, Short.MAX_VALUE)
         );
 
-        guideAndGeneratePanel.add(guideImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 190));
+        guideAndGeneratePanel.add(guideImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 210));
 
-        generateButton1.setText("Generate Autostereograms");
-        generateButton1.addActionListener(new java.awt.event.ActionListener() {
+        generateButton.setText("Generate");
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generateButton1ActionPerformed(evt);
+                generateButtonActionPerformed(evt);
             }
         });
-        guideAndGeneratePanel.add(generateButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 200, -1));
-
-        removeBackgroundButton.setText("Remove Background");
-        removeBackgroundButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeBackgroundButtonActionPerformed(evt);
-            }
-        });
-        guideAndGeneratePanel.add(removeBackgroundButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        guideAndGeneratePanel.add(generateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 170, -1));
 
         topPanel.add(guideAndGeneratePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 250));
 
@@ -571,7 +562,111 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
     
-   private javax.swing.JFileChooser saveToFileFileChooser;
+    //private ArrayList<BufferedImage> convertedFiles = new ArrayList<BufferedImage>(); 
+    
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+            
+            try {
+                imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+                System.out.println(imagesFromRecordedVideo.size());
+//                if (this.textRadioButton.isSelected()) 
+//                    {
+//                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
+//                    } 
+//                    else {
+//                        depthMap = getImage(this.mapFileChooser.getSelectedFile());
+//                    }
+
+                    
+                        
+                if (this.dottedRadioButton.isSelected()) {
+                    Color c1 = getColor1();
+                    Color c2 = getColor2();
+                    Color c3 = getColor3();
+                    float intensity = getIntensity();
+                    float obsDistance = getObservationDistance();
+                    float eyeSep = getEyeSeparation();
+                    float maxDepth = getMaxDepth();
+                    float minDepth = getMinDepth();
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
+                    int horizPPI = getHorizontalPPI();
+                    
+                    
+                    for (int i = 0; i < imagesFromRecordedVideo.size(); i++) {
+                        File f = imagesFromRecordedVideo.get(i);
+                        if (f.getName().toUpperCase().endsWith(".JPG")){
+                            depthMap = getImage(imagesFromRecordedVideo.get(i));
+                            BufferedImage stereogram = StereogramGenerator.generateSIRD(
+                                depthMap,
+                                c1, c2, c3, intensity,
+                                width, height,
+                                obsDistance, eyeSep,
+                                maxDepth, minDepth,
+                                horizPPI);
+                            //convertedFiles.add(stereogram);
+                            File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
+                            saveFile(f1,stereogram);
+                    
+//                    if (this.stereogramWindow != null) 
+//                    {
+//                        this.stereogramWindow.dispose();
+//                    }
+                    //this.stereogramWindow = new StereogramWindow(stereogram);
+                    //this.stereogramWindow.setVisible(true);
+                        }
+                    }
+                    
+                } else {
+                    
+
+                    BufferedImage texturePattern = getImage(this.patternFileChooser.getSelectedFile());
+
+                    float obsDistance = getObservationDistance();
+                    float eyeSep = getEyeSeparation();
+                    float maxDepth = getMaxDepth();
+                    float minDepth = getMinDepth();//System.out.println(minDepth);
+                    int vertPPI = getVerticalPPI(); //System.out.println(vertPPI);
+                    int horizPPI = getHorizontalPPI(); // System.out.println(horizPPI);
+                    int width = getStereogramWidth();
+                    int height = getStereogramHeight();
+                    
+                    //This one activates when the "Textured" option is selected
+                    for (int i = 0; i < imagesFromRecordedVideo.size(); i++) {
+                        File f = imagesFromRecordedVideo.get(i);
+                        
+                        if (f.getName().toUpperCase().endsWith(".JPG")){
+                            
+                            depthMap = getImage(imagesFromRecordedVideo.get(i));
+                            if (depthMap == null) {
+                                System.out.println("depthMap is null");
+                            }
+                            BufferedImage stereogram = StereogramGenerator.generateTexturedSIRD(
+                                depthMap, texturePattern,
+                                width, height,
+				obsDistance, eyeSep,
+				maxDepth, minDepth,
+				horizPPI, vertPPI);
+                            System.out.println("still good here");
+//                    if (this.stereogramWindow != null) {
+//                        this.stereogramWindow.dispose();
+//                    }
+                            //convertedFiles.add(stereogram);
+                            File f1 = new File (imagesFromRecordedVideo.get(i).getAbsolutePath());
+                            saveFile(f1,stereogram);
+                        }
+                    }
+                }
+            } 
+            
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error generating stereogram." +
+                        System.getProperty("line.separator") +
+                        "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+           
+    }//GEN-LAST:event_generateButtonActionPerformed
+    private javax.swing.JFileChooser saveToFileFileChooser;
 
     private void patternPreviewPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patternPreviewPanelMousePressed
         if (this.patternPreviewPanel.isEnabled()) {
@@ -771,14 +866,6 @@ public class MainGUI extends javax.swing.JFrame {
         stopButton.setVisible(false);
     }//GEN-LAST:event_stopButtonActionPerformed
 
-    private void generateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_generateButton1ActionPerformed
-
-    private void removeBackgroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBackgroundButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeBackgroundButtonActionPerformed
-
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -895,7 +982,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel elementLabel;
     private javax.swing.JLabel eyeLabel;
     private javax.swing.JTextField eyeTextField;
-    private javax.swing.JButton generateButton1;
+    private javax.swing.JButton generateButton;
     private javax.swing.JPanel guideAndGeneratePanel;
     private javax.swing.JPanel guideImagePanel;
     private javax.swing.JLabel hPpiLabel;
@@ -928,7 +1015,6 @@ public class MainGUI extends javax.swing.JFrame {
     private br.gfca.openstereogram.gui.ImagePreviewPanel patternPreviewPanel;
     private javax.swing.JLabel percentLabel;
     private javax.swing.JButton recordButton;
-    private javax.swing.JButton removeBackgroundButton;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
     private javax.swing.JButton stopButton;
