@@ -83,6 +83,7 @@ public class MainGUI extends javax.swing.JFrame {
         guideAndGeneratePanel = new javax.swing.JPanel();
         guideImagePanel = new javax.swing.JPanel();
         generateButton = new javax.swing.JButton();
+        removeBackgroundButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         mapAndPatternPanel = new javax.swing.JPanel();
         textLabel = new javax.swing.JLabel();
@@ -132,6 +133,7 @@ public class MainGUI extends javax.swing.JFrame {
         typePanel.add(lookLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, -1));
 
         lookButtonGroup.add(dottedRadioButton);
+        dottedRadioButton.setSelected(true);
         dottedRadioButton.setText("Dotted");
         dottedRadioButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         dottedRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -143,7 +145,6 @@ public class MainGUI extends javax.swing.JFrame {
         typePanel.add(dottedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 120, -1));
 
         lookButtonGroup.add(texturedRadioButton);
-        texturedRadioButton.setSelected(true);
         texturedRadioButton.setText("Textured");
         texturedRadioButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         texturedRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -194,7 +195,7 @@ public class MainGUI extends javax.swing.JFrame {
         observationLabel.setText("Obs. distance:");
         parametersPanel.add(observationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, -1));
 
-        observationTextField.setText("14");
+        observationTextField.setText("20");
         parametersPanel.add(observationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 50, -1));
 
         eyeLabel.setText("Eye separation:");
@@ -206,7 +207,12 @@ public class MainGUI extends javax.swing.JFrame {
         maxDepthLabel.setText("Max. depth:");
         parametersPanel.add(maxDepthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 100, -1));
 
-        maxDepthTextField.setText("12");
+        maxDepthTextField.setText("2000");
+        maxDepthTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxDepthTextFieldActionPerformed(evt);
+            }
+        });
         parametersPanel.add(maxDepthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 50, -1));
 
         minDepthLabel.setText("Min. depth:");
@@ -218,25 +224,30 @@ public class MainGUI extends javax.swing.JFrame {
         widthLabel.setText("Width:");
         parametersPanel.add(widthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, -1));
 
-        widthTextField.setText("800");
+        widthTextField.setText("640");
+        widthTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                widthTextFieldActionPerformed(evt);
+            }
+        });
         parametersPanel.add(widthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 50, -1));
 
         heightLabel.setText("Height:");
         parametersPanel.add(heightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 100, -1));
 
-        heightTextField.setText("600");
+        heightTextField.setText("480");
         parametersPanel.add(heightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 50, -1));
 
         vPpiLabel.setText("Vert. PPI:");
         parametersPanel.add(vPpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 100, -1));
 
-        vPpiTextField.setText("81");
+        vPpiTextField.setText("50");
         parametersPanel.add(vPpiTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 50, -1));
 
         hPpiLabel.setText("Horiz. PPI:");
         parametersPanel.add(hPpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, -1));
 
-        hPpiTextField.setText("81");
+        hPpiTextField.setText("50");
         parametersPanel.add(hPpiTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 50, -1));
 
         topPanel.add(parametersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 240, 250));
@@ -255,10 +266,10 @@ public class MainGUI extends javax.swing.JFrame {
         );
         guideImagePanelLayout.setVerticalGroup(
             guideImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
+            .addGap(0, 186, Short.MAX_VALUE)
         );
 
-        guideAndGeneratePanel.add(guideImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 210));
+        guideAndGeneratePanel.add(guideImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 190));
 
         generateButton.setText("Generate");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -267,6 +278,14 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         guideAndGeneratePanel.add(generateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 170, -1));
+
+        removeBackgroundButton.setText("Remove Background");
+        removeBackgroundButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBackgroundButtonActionPerformed(evt);
+            }
+        });
+        guideAndGeneratePanel.add(removeBackgroundButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         topPanel.add(guideAndGeneratePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 250));
 
@@ -547,6 +566,8 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
     private BufferedImage image;
     private BufferedImage depthMap;
     String homeDir = System.getProperty("user.home");
@@ -568,7 +589,6 @@ public class MainGUI extends javax.swing.JFrame {
             
             try {
                 imagesFromRecordedVideo = new ArrayList<File>(Arrays.asList(folder.listFiles()));
-                System.out.println(imagesFromRecordedVideo.size());
 //                if (this.textRadioButton.isSelected()) 
 //                    {
 //                        depthMap = ImageManipulator.generateTextDepthMap(getMapText(), getFontSize(), getStereogramWidth(), getStereogramHeight());
@@ -866,6 +886,44 @@ public class MainGUI extends javax.swing.JFrame {
         stopButton.setVisible(false);
     }//GEN-LAST:event_stopButtonActionPerformed
 
+    private void removeBackgroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBackgroundButtonActionPerformed
+        try {
+            ArrayList<File> images = new ArrayList<File>(Arrays.asList(folder.listFiles()));
+            for (int i = 0; i < images.size(); i++) {
+                File f = images.get(i);
+                if (f.getName().toUpperCase().endsWith(".JPG")){ 
+                    BufferedImage img = ImageIO.read(f);
+                    for (int x = 0; x < 640; x++) {
+                        for (int y = 0; y < 480; y ++) {
+                            Color originalColor = new Color(img.getRGB(x, y));
+                            int r = originalColor.getRed();
+                            int g = originalColor.getGreen();
+                            int b = originalColor.getBlue();
+                            if (g < 155) {
+                                originalColor = new Color(0, 0, 0);
+                            }
+                            img.setRGB(x, y, originalColor.getRGB());
+                        }
+                    }
+                    File f1 = new File(images.get(i).getAbsolutePath());
+                    saveFile(f1, img);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error generating stereogram." +
+                System.getProperty("line.separator") +
+                "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_removeBackgroundButtonActionPerformed
+
+    private void widthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_widthTextFieldActionPerformed
+
+    private void maxDepthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxDepthTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxDepthTextFieldActionPerformed
+
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -1015,6 +1073,7 @@ public class MainGUI extends javax.swing.JFrame {
     private br.gfca.openstereogram.gui.ImagePreviewPanel patternPreviewPanel;
     private javax.swing.JLabel percentLabel;
     private javax.swing.JButton recordButton;
+    private javax.swing.JButton removeBackgroundButton;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
     private javax.swing.JButton stopButton;

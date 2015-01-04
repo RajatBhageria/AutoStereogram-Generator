@@ -30,8 +30,8 @@ public class DepthMap extends PApplet
   String homeDir = System.getProperty("user.home");
   String saveFrameDir = homeDir + "/Pictures/Autostereogram Frames/img-#####.jpg";
   private SimpleOpenNI kinect;
-  private PImage liveMap;
-  private int maxDistance = 1500;
+  //private PImage liveMap;
+  //private int maxDistance = 1500;
   
   public DepthMap() 
   {
@@ -67,7 +67,7 @@ public class DepthMap extends PApplet
 
     // enable depthMap generation 
     kinect.enableDepth();
-    liveMap = loadImage("./images/try_640_480.jpg");
+    //liveMap = loadImage("./images/try_640_480.jpg");
   }
 
   // mirror is by default enabled
@@ -77,29 +77,30 @@ public class DepthMap extends PApplet
   {
      background(color(0,0,0));
      kinect.update();
-     int[] depthValues = kinect.depthMap();
-     liveMap.width = 640;
-     liveMap.height = 480;
-     liveMap.loadPixels();
+     //int[] depthValues = kinect.depthMap();
+     //liveMap.width = 640;
+     //liveMap.height = 480;
+     //liveMap.loadPixels();
      
-     for (int y = 0; y < 480; y++) {
-        for (int x = 0; x < 640; x++) {
-           int i = x + (y * 640);
-           int currentDepthValue = depthValues[i];
-           if (currentDepthValue > maxDistance) {
-               liveMap.pixels[i] = color(0, 0, 0);  
-           }       
-           else {
-               int lum = (int) (-0.2684 * currentDepthValue + 402.63);
-               liveMap.pixels[i] = color(lum, lum, lum);
-           }
-        }  
-     }
+     //for (int y = 0; y < 480; y++) {
+       // for (int x = 0; x < 640; x++) {
+           //int i = x + (y * 640);
+           //int currentDepthValue = depthValues[i];
+           //if (currentDepthValue > maxDistance) {
+             //  liveMap.pixels[i] = color(0, 0, 0);  
+          // }       
+         //  else {
+           //    int lum = (int) (-0.2684 * currentDepthValue + 402.63);
+          //     liveMap.pixels[i] = color(lum, lum, lum);
+          // }
+      //  }  
+     //}
      
-     liveMap.updatePixels();
+     //liveMap.updatePixels();
      
   // draw depthImageMap
-    image(liveMap, 0, 0);
+    //image(liveMap, 0, 0);
+    image(kinect.depthImage(), 0, 0);
 
    // draw irImageMap
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
