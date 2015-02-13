@@ -61,8 +61,6 @@ public class MainGUI extends javax.swing.JFrame {
         elementLabel = new javax.swing.JLabel();
         textRadioButton = new javax.swing.JRadioButton();
         mapRadioButton = new javax.swing.JRadioButton();
-        recordButton = new javax.swing.JButton();
-        stopButton = new javax.swing.JButton();
         parametersPanel = new javax.swing.JPanel();
         observationLabel = new javax.swing.JLabel();
         observationTextField = new javax.swing.JTextField();
@@ -81,9 +79,12 @@ public class MainGUI extends javax.swing.JFrame {
         hPpiLabel = new javax.swing.JLabel();
         hPpiTextField = new javax.swing.JTextField();
         guideAndGeneratePanel = new javax.swing.JPanel();
-        guideImagePanel = new javax.swing.JPanel();
         generateButton = new javax.swing.JButton();
         removeBackgroundButton = new javax.swing.JButton();
+        pixelThresholdTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        recordButton = new javax.swing.JButton();
+        stopButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         mapAndPatternPanel = new javax.swing.JPanel();
         textLabel = new javax.swing.JLabel();
@@ -142,6 +143,11 @@ public class MainGUI extends javax.swing.JFrame {
                 dottedRadioButtonStateChanged(evt);
             }
         });
+        dottedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dottedRadioButtonActionPerformed(evt);
+            }
+        });
         typePanel.add(dottedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 120, -1));
 
         lookButtonGroup.add(texturedRadioButton);
@@ -171,22 +177,6 @@ public class MainGUI extends javax.swing.JFrame {
         mapRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         typePanel.add(mapRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 120, -1));
 
-        recordButton.setText("Record");
-        recordButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recordButtonActionPerformed(evt);
-            }
-        });
-        typePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, -1));
-
-        stopButton.setText("Stop");
-        stopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopButtonActionPerformed(evt);
-            }
-        });
-        typePanel.add(stopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 70, -1));
-
         topPanel.add(typePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 250));
 
         parametersPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -196,12 +186,22 @@ public class MainGUI extends javax.swing.JFrame {
         parametersPanel.add(observationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, -1));
 
         observationTextField.setText("20");
+        observationTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                observationTextFieldActionPerformed(evt);
+            }
+        });
         parametersPanel.add(observationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 50, -1));
 
         eyeLabel.setText("Eye separation:");
         parametersPanel.add(eyeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 100, -1));
 
         eyeTextField.setText("2.5");
+        eyeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eyeTextFieldActionPerformed(evt);
+            }
+        });
         parametersPanel.add(eyeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 50, -1));
 
         maxDepthLabel.setText("Max. depth:");
@@ -224,7 +224,7 @@ public class MainGUI extends javax.swing.JFrame {
         widthLabel.setText("Width:");
         parametersPanel.add(widthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, -1));
 
-        widthTextField.setText("640");
+        widthTextField.setText("1920");
         widthTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 widthTextFieldActionPerformed(evt);
@@ -235,41 +235,30 @@ public class MainGUI extends javax.swing.JFrame {
         heightLabel.setText("Height:");
         parametersPanel.add(heightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 100, -1));
 
-        heightTextField.setText("480");
+        heightTextField.setText("1080");
         parametersPanel.add(heightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 50, -1));
 
         vPpiLabel.setText("Vert. PPI:");
         parametersPanel.add(vPpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 100, -1));
 
-        vPpiTextField.setText("50");
+        vPpiTextField.setText("80");
+        vPpiTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vPpiTextFieldActionPerformed(evt);
+            }
+        });
         parametersPanel.add(vPpiTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 50, -1));
 
         hPpiLabel.setText("Horiz. PPI:");
         parametersPanel.add(hPpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, -1));
 
-        hPpiTextField.setText("50");
+        hPpiTextField.setText("80");
         parametersPanel.add(hPpiTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 50, -1));
 
         topPanel.add(parametersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 240, 250));
 
         guideAndGeneratePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         guideAndGeneratePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        guideImagePanel.setBackground(new java.awt.Color(255, 255, 255));
-        guideImagePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout guideImagePanelLayout = new javax.swing.GroupLayout(guideImagePanel);
-        guideImagePanel.setLayout(guideImagePanelLayout);
-        guideImagePanelLayout.setHorizontalGroup(
-            guideImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 186, Short.MAX_VALUE)
-        );
-        guideImagePanelLayout.setVerticalGroup(
-            guideImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 186, Short.MAX_VALUE)
-        );
-
-        guideAndGeneratePanel.add(guideImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 190));
 
         generateButton.setText("Generate");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +274,34 @@ public class MainGUI extends javax.swing.JFrame {
                 removeBackgroundButtonActionPerformed(evt);
             }
         });
-        guideAndGeneratePanel.add(removeBackgroundButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        guideAndGeneratePanel.add(removeBackgroundButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        pixelThresholdTextField.setText("170");
+        pixelThresholdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pixelThresholdTextFieldActionPerformed(evt);
+            }
+        });
+        guideAndGeneratePanel.add(pixelThresholdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 40, 30));
+
+        jLabel1.setText("Pixel Threshold: ");
+        guideAndGeneratePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 120, 30));
+
+        recordButton.setText("Record");
+        recordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recordButtonActionPerformed(evt);
+            }
+        });
+        guideAndGeneratePanel.add(recordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, -1));
+
+        stopButton.setText("Stop");
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
+        guideAndGeneratePanel.add(stopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, -1));
 
         topPanel.add(guideAndGeneratePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 250));
 
@@ -339,8 +355,10 @@ public class MainGUI extends javax.swing.JFrame {
         mapAndPatternPanel.add(mapPreviewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 110, 110));
 
         patternLabel.setText("Texture pattern:");
+        patternLabel.setEnabled(false);
         mapAndPatternPanel.add(patternLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 110, -1));
 
+        patternPreviewPanel.setEnabled(false);
         patternPreviewPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 patternPreviewPanelMousePressed(evt);
@@ -372,12 +390,10 @@ public class MainGUI extends javax.swing.JFrame {
         colorsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         color1Label.setText("Color 1:");
-        color1Label.setEnabled(false);
         colorsPanel.add(color1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         color1Panel.setBackground(new java.awt.Color(255, 0, 0));
         color1Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        color1Panel.setEnabled(false);
         color1Panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 color1PanelMouseEntered(evt);
@@ -404,12 +420,10 @@ public class MainGUI extends javax.swing.JFrame {
         colorsPanel.add(color1Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 50, 50));
 
         color2Label.setText("Color 2:");
-        color2Label.setEnabled(false);
         colorsPanel.add(color2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 60, -1));
 
         color2Panel.setBackground(new java.awt.Color(0, 255, 0));
         color2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        color2Panel.setEnabled(false);
         color2Panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 color2PanelMouseEntered(evt);
@@ -436,12 +450,10 @@ public class MainGUI extends javax.swing.JFrame {
         colorsPanel.add(color2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 50, 50));
 
         color3Label.setText("Color 3:");
-        color3Label.setEnabled(false);
         colorsPanel.add(color3Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 60, -1));
 
         color3Panel.setBackground(new java.awt.Color(0, 0, 255));
         color3Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        color3Panel.setEnabled(false);
         color3Panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 color3PanelMouseEntered(evt);
@@ -470,7 +482,6 @@ public class MainGUI extends javax.swing.JFrame {
         thirdColorCheckBox.setSelected(true);
         thirdColorCheckBox.setText("3rd color");
         thirdColorCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        thirdColorCheckBox.setEnabled(false);
         thirdColorCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         thirdColorCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,7 +491,6 @@ public class MainGUI extends javax.swing.JFrame {
         colorsPanel.add(thirdColorCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 80, -1));
 
         intensityLabel.setText("1st color intensity:");
-        intensityLabel.setEnabled(false);
         colorsPanel.add(intensityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 200, -1));
 
         intensitySlider.setMaximum(99);
@@ -488,7 +498,6 @@ public class MainGUI extends javax.swing.JFrame {
         intensitySlider.setPaintLabels(true);
         intensitySlider.setPaintTicks(true);
         intensitySlider.setSnapToTicks(true);
-        intensitySlider.setEnabled(false);
         intensitySlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 intensitySliderStateChanged(evt);
@@ -667,7 +676,6 @@ public class MainGUI extends javax.swing.JFrame {
 				obsDistance, eyeSep,
 				maxDepth, minDepth,
 				horizPPI, vertPPI);
-                            System.out.println("still good here");
 //                    if (this.stereogramWindow != null) {
 //                        this.stereogramWindow.dispose();
 //                    }
@@ -899,7 +907,7 @@ public class MainGUI extends javax.swing.JFrame {
                             int r = originalColor.getRed();
                             int g = originalColor.getGreen();
                             int b = originalColor.getBlue();
-                            if (g < 155) {
+                            if (g < getPixelThreshold()) {
                                 originalColor = new Color(0, 0, 0);
                             }
                             img.setRGB(x, y, originalColor.getRGB());
@@ -909,7 +917,7 @@ public class MainGUI extends javax.swing.JFrame {
                     saveFile(f1, img);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error generating stereogram." +
                 System.getProperty("line.separator") +
                 "ERROR: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -923,6 +931,26 @@ public class MainGUI extends javax.swing.JFrame {
     private void maxDepthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxDepthTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_maxDepthTextFieldActionPerformed
+
+    private void dottedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dottedRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dottedRadioButtonActionPerformed
+
+    private void observationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observationTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_observationTextFieldActionPerformed
+
+    private void vPpiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vPpiTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vPpiTextFieldActionPerformed
+
+    private void pixelThresholdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelThresholdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pixelThresholdTextFieldActionPerformed
+
+    private void eyeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eyeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eyeTextFieldActionPerformed
 
     private void changeMouseCursor(boolean isDefault) {
         this.setCursor(isDefault ? Cursor.getDefaultCursor() : Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -958,7 +986,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Integer.parseInt(this.widthTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid width.");
+            throw new Exception("Invalid width.");
         }
     }
 
@@ -966,7 +994,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Integer.parseInt(this.heightTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid height.");
+            throw new Exception("Invalid height.");
         }
     }
 
@@ -974,7 +1002,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Float.parseFloat(this.observationTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid observation distance.");
+            throw new Exception("Invalid observation distance.");
         }
     }
 
@@ -982,7 +1010,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Float.parseFloat(this.eyeTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid eye separation.");
+            throw new Exception("Invalid eye separation.");
         }
     }
 
@@ -990,7 +1018,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Float.parseFloat(this.maxDepthTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid max. depth.");
+            throw new Exception("Invalid max. depth.");
         }
     }
 
@@ -998,7 +1026,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Float.parseFloat(this.minDepthTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid min. depth.");
+            throw new Exception("Invalid min. depth.");
         }
     }
 
@@ -1006,7 +1034,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Integer.parseInt(this.hPpiTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid horizontal PPI.");
+            throw new Exception("Invalid horizontal PPI.");
         }
     }
 
@@ -1014,7 +1042,15 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             return Integer.parseInt(this.vPpiTextField.getText().trim());
         } catch (Exception e) {
-            throw new Exception("Inavlid vertical PPI.");
+            throw new Exception("Invalid vertical PPI.");
+        }
+    }
+    
+        private float getPixelThreshold() throws Exception {
+        try {
+            return Float.parseFloat(this.pixelThresholdTextField.getText().trim());
+        } catch (Exception e) {
+            throw new Exception("Invalid observation distance.");
         }
     }
 
@@ -1042,7 +1078,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField eyeTextField;
     private javax.swing.JButton generateButton;
     private javax.swing.JPanel guideAndGeneratePanel;
-    private javax.swing.JPanel guideImagePanel;
     private javax.swing.JLabel hPpiLabel;
     private javax.swing.JTextField hPpiTextField;
     private javax.swing.JLabel heightLabel;
@@ -1052,6 +1087,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator helpSeparator;
     private javax.swing.JLabel intensityLabel;
     private javax.swing.JSlider intensitySlider;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.ButtonGroup lookButtonGroup;
@@ -1072,6 +1108,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel patternLabel;
     private br.gfca.openstereogram.gui.ImagePreviewPanel patternPreviewPanel;
     private javax.swing.JLabel percentLabel;
+    private javax.swing.JTextField pixelThresholdTextField;
     private javax.swing.JButton recordButton;
     private javax.swing.JButton removeBackgroundButton;
     private javax.swing.JLabel sizeLabel;

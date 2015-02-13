@@ -12,7 +12,7 @@ import static processing.core.PApplet.println;
 
 /**
  *
- * @author crisscrosskao
+ * @author Christopher Kao
  */
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -57,12 +57,12 @@ public class DepthMap extends PApplet
   {
     size(640, 480);
     frameRate(30);
-    if (kinect.isInit() == false)
-    {
-        println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
-        exit();
-        return;
-    }
+//    if (kinect.isInit() == false)
+//    {
+//        println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
+//        exit();
+//        return;
+//    }
     kinect.setMirror(false);
 
     // enable depthMap generation 
