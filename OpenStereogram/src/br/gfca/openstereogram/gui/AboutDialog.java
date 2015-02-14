@@ -32,22 +32,23 @@ public class AboutDialog extends javax.swing.JDialog {
         versionLabel = new javax.swing.JLabel();
         urlLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About Open Stereogram");
 
-        titleLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
+        titleLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Open Stereogram");
+        titleLabel.setText("AutoStereogram4FilmMakers");
         titleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         descriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        descriptionLabel.setText(" Open source stereogram generator");
+        descriptionLabel.setText("Easily Create AutoStereographic Films using our software and Kinect");
 
         versionLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        versionLabel.setText(" Version 0.1 (2008)");
+        versionLabel.setText("Fork of OpenStereogram (https://code.google.com/p/openstereogram/)");
 
-        urlLabel.setText("http://gfcaprojects.googlepages.com/openstereogram");
+        urlLabel.setText("Souce: https://github.com/RajatBhageria/AutoStereogram-Generator");
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -56,32 +57,44 @@ public class AboutDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("Created by Rajat Bhageria, Chris Kao, and Harman Anand");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(urlLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(versionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(versionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(urlLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(descriptionLabel)
-                .addGap(32, 32, 32)
-                .addComponent(versionLabel)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(urlLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(versionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(okButton)
                 .addContainerGap())
         );
@@ -96,6 +109,7 @@ public class AboutDialog extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel urlLabel;
