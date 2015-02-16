@@ -21,7 +21,6 @@ import static processing.core.PApplet.println;
  */
 import java.util.Iterator;
 import SimpleOpenNI.*;
-import javax.swing.JOptionPane;
 import processing.core.*;
 import static processing.core.PApplet.println;
 
@@ -101,14 +100,8 @@ public class DepthMap extends PApplet
      
   // draw depthImageMap
     //image(liveMap, 0, 0);
-     try{
-        image(kinect.depthImage(), 0, 0);
-     }
-     catch(NullPointerException e){
-        JOptionPane.showMessageDialog(frame,"Kinect was not found to be connected \nPlease Connect the Kinect and try again\nThis program will now terminate."); 
-        exit();
-     } 
-    
+    image(kinect.depthImage(), 0, 0);
+
    // draw irImageMap
    // image(ContextTest.rgbImage(), ContextTest.depthWidth() + 10, 0);
     if (recordFlag)
